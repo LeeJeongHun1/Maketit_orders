@@ -53,3 +53,15 @@
 
 ![complete](https://user-images.githubusercontent.com/34118304/184318353-52ce7fdf-655d-4ff6-8e4e-bca688950221.PNG)
 ![complete2](https://user-images.githubusercontent.com/34118304/184318355-8be7e5d2-5185-4356-8faa-aead93eadf61.PNG)
+
+- 주문조회(단건)
+
+![order](https://user-images.githubusercontent.com/34118304/184319416-d45b1a59-83d4-40f2-aaa0-b5e32f909d2e.PNG)
+![order2](https://user-images.githubusercontent.com/34118304/184319421-4656fad4-fba5-4640-be54-0b7060a1b6cd.PNG)
+
+- 주문조회(전체)
+
+![orderAll](https://user-images.githubusercontent.com/34118304/184319423-6ff2fe45-0720-49df-999b-c34f16c8dd0f.PNG)
+![orderAll2](https://user-images.githubusercontent.com/34118304/184319426-beeec26b-70bd-4223-b667-22397963018f.PNG)
+![orderAll3](https://user-images.githubusercontent.com/34118304/184319428-f7997740-e650-4fb5-b77c-40aae775141f.PNG)
+
