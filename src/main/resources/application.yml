@@ -1,0 +1,35 @@
+# server port
+server:
+  port: 8008
+
+
+# config
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  profiles:
+    active: 'local'
+  
+  jpa: #jpa
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate.format_sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  # db
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+
+
+
+logging:
+  config: classpath:log4j2.xml
