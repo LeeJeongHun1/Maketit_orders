@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.maketit.maketit_orders.orders.domain.QOrder.order;
 
@@ -16,8 +17,8 @@ import static com.maketit.maketit_orders.orders.domain.QOrder.order;
 public class OrderQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public OrderResponseDto findByOrderId(Long orderId) {
-        return queryFactory.select(Projections.fields(OrderResponseDto.class,
+    public Optional<OrderResponseDto> findByOrderId(Long orderId) {
+        return Optional.ofNullable(queryFactory.select(Projections.fields(OrderResponseDto.class,
                         order.account.name.as("purchaser"),
                         order.account.phone.as("phone"),
                         order.account.address.as("address"),
@@ -31,7 +32,7 @@ public class OrderQueryRepository {
                 .join(order.account)
                 .join(order.product)
                 .where(order.orderId.eq(orderId))
-                .fetchOne();
+                .fetchOne());
     }
 
 

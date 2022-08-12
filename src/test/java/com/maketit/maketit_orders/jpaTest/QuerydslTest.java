@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
@@ -25,7 +27,7 @@ public class QuerydslTest {
     @Test
     void querydsl_주문조회() {
         Long orderId = 1L;
-        OrderResponseDto orderResponseDto = orderQueryRepository.findByOrderId(orderId);
+        OrderResponseDto orderResponseDto = orderQueryRepository.findByOrderId(orderId).get();
         assertNotNull(orderResponseDto);
         log.info("dto: {}", orderResponseDto);
 

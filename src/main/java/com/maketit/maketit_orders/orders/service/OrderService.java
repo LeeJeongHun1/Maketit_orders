@@ -44,6 +44,10 @@ public class OrderService {
         Product product = productRepository.findById(productId).orElseThrow(() ->
                 new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
 
+        if (product.getStock() == 0) {
+            throw new CustomException(ErrorCode.SOLD_OUT);
+        }
+
         // email 주문 유저 조회
         Account account = accountRepository.findByEmail(orderRequestDto.getEmail()).orElseThrow(() ->
                 new CustomException(ErrorCode.USER_NOT_FOUND));
@@ -68,7 +72,9 @@ public class OrderService {
 
         // 주문 처리 후 재고 변경
         product.stockUpdate(orderRequestDto.getCount());
-        return orderQueryRepository.findByOrderId(savedOrder.getOrderId());
+        OrderResponseDto orderResponseDto = orderQueryRepository.findByOrderId(savedOrder.getOrderId()).orElseThrow(() ->
+                new CustomException(ErrorCode.ORDER_NOT_FOUND));
+        return orderResponseDto;
     }
 
     /**
@@ -81,7 +87,7 @@ public class OrderService {
     public OrderResponseDto orderComplete(Long orderId) {
         // 결제와 같은 주문처리 로직이 끝났다는 가정하에 주문 완료
         Order order = orderRepository.findById(orderId).orElseThrow(() ->
-                new CustomException(ErrorCode.NOT_FOUND));
+                new CustomException(ErrorCode.ORDER_NOT_FOUND));
 
         switch (order.getOrderStatus()) {
             case order:
@@ -92,18 +98,25 @@ public class OrderService {
             case cancel:
                 throw new CustomException(ErrorCode.CANCEL_ORDER);
         }
-        return orderQueryRepository.findByOrderId(order.getOrderId());
+        OrderResponseDto orderResponseDto = orderQueryRepository.findByOrderId(order.getOrderId()).orElseThrow(() ->
+                new CustomException(ErrorCode.ORDER_NOT_FOUND));
+        return orderResponseDto;
     }
 
 
     @Transactional(readOnly = true)
     public OrderResponseDto order(Long orderId) {
-        return orderQueryRepository.findByOrderId(orderId);
+        OrderResponseDto orderResponseDto = orderQueryRepository.findByOrderId(orderId).orElseThrow(() ->
+                new CustomException(ErrorCode.ORDER_NOT_FOUND));
+        return orderResponseDto;
     }
 
     @Transactional(readOnly = true)
     public List<OrderResponseDto> orderAll(String email) {
-        return orderQueryRepository.findAll(email);
+        Account account = accountRepository.findByEmail(email).orElseThrow(() ->
+                new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        return orderQueryRepository.findAll(account.getEmail());
     }
 
 }

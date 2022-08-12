@@ -11,7 +11,9 @@ public enum ErrorCode {
     PRODUCT_NOT_FOUND(404, "존재하지 않는 상품입니다.."),
 
     NOT_FOUND(404, "존재하지 않는 페이지입니다."),
+    ORDER_NOT_FOUND(404, "존재하지 않는 주문입니다."),
     STOCK_SHORT(403, "주문하신 수량에 비해 재고가 부족합니다."),
+    SOLD_OUT(403, "주문하신 상품은 품절되었습니다."),
     ALREADY_ORDER(403, "이미 주문완료된 주문입니다."),
     CANCEL_ORDER(403, "이미 취소된 주문입니다."),
 
